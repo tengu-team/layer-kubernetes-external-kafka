@@ -1,0 +1,11 @@
+name: kubernetes-external-kafka
+summary: This charm creates external services for Kafka.
+maintainer: Sander Borny <sander.borny@ugent.be>
+description: |
+  This charm provides external (Kafka) service requests to a kubernetes-deployer charm.
+requires:
+  kafka:
+    interface: kafka
+    scope: container
+subordinate: true
+series: ['xenial']
