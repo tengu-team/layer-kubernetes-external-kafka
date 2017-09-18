@@ -37,3 +37,14 @@ def kafka_connected(kafka):
             ips.append(broker['host'])
         configure_headless_service(ips, int(port))
         set_state('service.requested')
+
+
+@when('kafka-service.available', 'kubernetes-deployer.available')
+def service_requested(service, deployer):
+    service.send_service_name(unitdata.kv().get('service_name', ''))
+
+
+@when('kafka-service.available')
+@when_not('kubernetes-deployer.available')
+def service_requested(service):
+    service.send_service_name('')
